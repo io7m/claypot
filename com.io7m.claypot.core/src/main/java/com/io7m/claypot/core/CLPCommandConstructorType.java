@@ -22,5 +22,13 @@ package com.io7m.claypot.core;
 
 public interface CLPCommandConstructorType
 {
+  /**
+   * Create a new command instance.
+   *
+   * @param context The command context
+   *
+   * @return A new command
+   */
+
   CLPCommandType create(CLPCommandContextType context);
 }

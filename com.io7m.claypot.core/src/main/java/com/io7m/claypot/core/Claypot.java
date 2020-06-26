@@ -23,6 +23,10 @@ import org.slf4j.Logger;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * The main wrapper over {@link JCommander}.
+ */
+
 public final class Claypot
 {
   private final CLPApplicationConfiguration configuration;
@@ -46,6 +50,14 @@ public final class Claypot
     this.strings =
       Objects.requireNonNull(inStrings, "inStrings");
   }
+
+  /**
+   * Create a new wrapper based on the given configuration.
+   *
+   * @param configuration The application configuration
+   *
+   * @return A new wrapper
+   */
 
   public static Claypot create(
     final CLPApplicationConfiguration configuration)
@@ -83,17 +95,30 @@ public final class Claypot
     return new Claypot(configuration, commander, commandMap, strings);
   }
 
+  /**
+   * @return The exit code resulting from the most recent {@link #execute(String[])}
+   */
+
   public int exitCode()
   {
     return this.exitCode;
   }
 
+  /**
+   * Execute the wrapper for the given command-line arguments.
+   *
+   * @param args The command-line arguments
+   */
+
   public void execute(
     final String[] args)
   {
+    Objects.requireNonNull(args, "args");
+
     final var logger = this.configuration.logger();
 
     try {
+      this.exitCode = 0;
       this.commander.parse(args);
 
       final String cmd = this.commander.getParsedCommand();
@@ -178,6 +203,15 @@ public final class Claypot
     this.logExceptionFriendly(logger, true, e.getCause());
   }
 
+  @Override
+  public String toString()
+  {
+    return String.format(
+      "[Claypot 0x%s]",
+      Long.toUnsignedString(System.identityHashCode(this), 16)
+    );
+  }
+
   private static final class Context implements CLPCommandContextType
   {
     private final JCommander commander;
@@ -204,14 +238,5 @@ public final class Claypot
     {
       return this.commander;
     }
-  }
-
-  @Override
-  public String toString()
-  {
-    return String.format(
-      "[Claypot 0x%s]",
-      Long.toUnsignedString(System.identityHashCode(this), 16)
-    );
   }
 }

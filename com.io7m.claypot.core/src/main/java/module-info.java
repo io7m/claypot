@@ -14,37 +14,22 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
-
-import com.io7m.immutables.styles.ImmutablesStyleType;
-import org.immutables.value.Value;
-import org.slf4j.Logger;
-
-import java.util.List;
-
 /**
- * The application configuration.
+ * JCommander conventions for io7m projects (Core)
  */
 
-@ImmutablesStyleType
-@Value.Immutable
-public interface CLPApplicationConfigurationType
+module com.io7m.claypot.core
 {
-  /**
-   * @return The logger used for command-line messages
-   */
+  requires static com.io7m.immutables.style;
+  requires static org.immutables.value;
+  requires static org.osgi.annotation.bundle;
+  requires static org.osgi.annotation.versioning;
 
-  Logger logger();
+  requires ch.qos.logback.classic;
+  requires jcommander;
+  requires org.slf4j;
 
-  /**
-   * @return The name of the application
-   */
+  opens com.io7m.claypot.core to jcommander;
 
-  String programName();
-
-  /**
-   * @return The list of commands
-   */
-
-  List<CLPCommandConstructorType> commands();
+  exports com.io7m.claypot.core;
 }
