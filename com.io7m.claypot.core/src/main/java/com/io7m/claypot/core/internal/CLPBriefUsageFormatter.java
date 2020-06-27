@@ -67,15 +67,16 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
     final String indent)
   {
     super.appendMainLine(out, hasOptions, hasCommands, indentCount, indent);
+    out.append('\n');
+  }
 
-    out.append('\n');
-    out.append("  ");
-    out.append(this.strings.format(
-      "com.io7m.claypot.help",
-      this.commander.getProgramName()
-    ).trim());
-    out.append('\n');
-    out.append('\n');
+  private static String indentLine(
+    final String text)
+  {
+    if (text.trim().isEmpty()) {
+      return "";
+    }
+    return "  " + text;
   }
 
   @Override
@@ -120,6 +121,19 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
         out.append('\n');
       }
     }
+
+    out.append('\n');
+
+    final var programName = this.commander.getProgramName();
+    this.strings.format("com.io7m.claypot.help", programName)
+      .trim()
+      .lines()
+      .forEach(line -> {
+        out.append(indentLine(line));
+        out.append('\n');
+      });
+
+    out.append('\n');
   }
 
   @Override

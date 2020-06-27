@@ -30,6 +30,7 @@ module com.io7m.claypot.core
   requires org.slf4j;
 
   opens com.io7m.claypot.core to jcommander;
+  opens com.io7m.claypot.core.internal to jcommander;
 
   exports com.io7m.claypot.core;
 }
