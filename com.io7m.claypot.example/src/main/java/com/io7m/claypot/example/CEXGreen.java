@@ -14,49 +14,39 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
+package com.io7m.claypot.example;
 
-import com.beust.jcommander.DefaultUsageFormatter;
 import com.beust.jcommander.Parameters;
+import com.io7m.claypot.core.CLPAbstractCommand;
+import com.io7m.claypot.core.CLPCommandContextType;
+import com.io7m.claypot.core.CLPStringsType;
 
-import static com.io7m.claypot.core.CLPCommandType.Status.SUCCESS;
-
-@Parameters(
-  resourceBundle = "com.io7m.claypot.core.Claypot",
-  commandDescriptionKey = "com.io7m.claypot.helpDescription")
-public final class CLPCommandHelp extends CLPAbstractCommand
+@Parameters(commandDescription = "Paint things green.")
+public final class CEXGreen extends CLPAbstractCommand
 {
-  public CLPCommandHelp(
-    final CLPCommandContextType inContext)
+  private final CLPStringsType strings;
+
+  public CEXGreen(final CLPCommandContextType inContext)
   {
     super(inContext);
+    this.strings = CEXStrings.create();
   }
 
   @Override
   protected Status executeActual()
   {
-    final var console = new CLPStringBuilderConsole();
-    final var commander = this.commander();
-    commander.setUsageFormatter(new DefaultUsageFormatter(commander));
-    commander.setConsole(console);
-    commander.usage();
-
-    this.logger().info("{}", console.builder().toString());
-    return SUCCESS;
+    return Status.SUCCESS;
   }
 
   @Override
-  public String toString()
+  public String extendedHelp()
   {
-    return String.format(
-      "[CLPCommandHelp 0x%s]",
-      Long.toUnsignedString(System.identityHashCode(this), 16)
-    );
+    return this.strings.format("greenExtendedHelp");
   }
 
   @Override
   public String name()
   {
-    return "help";
+    return "green";
   }
 }

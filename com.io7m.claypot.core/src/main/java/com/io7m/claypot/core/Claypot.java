@@ -18,10 +18,17 @@ package com.io7m.claypot.core;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import com.io7m.claypot.core.internal.CLPBriefUsageFormatter;
+import com.io7m.claypot.core.internal.CLPCommandHelp;
+import com.io7m.claypot.core.internal.CLPCommandRoot;
 import org.slf4j.Logger;
 
 import java.util.HashMap;
 import java.util.Objects;
+
+/**
+ * The main wrapper over {@link JCommander}.
+ */
 
 public final class Claypot
 {
@@ -47,13 +54,20 @@ public final class Claypot
       Objects.requireNonNull(inStrings, "inStrings");
   }
 
+  /**
+   * Create a new wrapper based on the given configuration.
+   *
+   * @param configuration The application configuration
+   *
+   * @return A new wrapper
+   */
+
   public static Claypot create(
     final CLPApplicationConfiguration configuration)
   {
     final var strings = CLPStrings.create();
-
     final var commander = new JCommander();
-    final var context = new Context(commander, configuration);
+    final var context = new Context(commander, strings, configuration);
 
     commander.setProgramName(configuration.programName());
     commander.addObject(new CLPCommandRoot(context));
@@ -63,7 +77,8 @@ public final class Claypot
     final var commandMap =
       new HashMap<String, CLPCommandType>(constructors.size() + 1);
 
-    commandMap.put("help", new CLPCommandHelp(context));
+    final var help = new CLPCommandHelp(context);
+    commandMap.put(help.name(), help);
 
     for (final var constructor : constructors) {
       final var command = constructor.create(context);
@@ -83,26 +98,39 @@ public final class Claypot
     return new Claypot(configuration, commander, commandMap, strings);
   }
 
+  /**
+   * @return The exit code resulting from the most recent {@link #execute(String[])}
+   */
+
   public int exitCode()
   {
     return this.exitCode;
   }
 
+  /**
+   * Execute the wrapper for the given command-line arguments.
+   *
+   * @param args The command-line arguments
+   */
+
   public void execute(
     final String[] args)
   {
+    Objects.requireNonNull(args, "args");
+
     final var logger = this.configuration.logger();
 
     try {
+      this.exitCode = 0;
       this.commander.parse(args);
 
       final String cmd = this.commander.getParsedCommand();
       if (cmd == null) {
-        final var console = new CLPStringBuilderConsole();
-        this.commander.setUsageFormatter(new CLPBriefUsageFormatter(this.commander));
-        this.commander.setConsole(console);
-        this.commander.usage();
-        logger.info("{}", console.builder().toString());
+        CLPBriefUsageFormatter.showBriefUsage(
+          logger,
+          this.configuration,
+          this.commander
+        );
         this.exitCode = 1;
         return;
       }
@@ -178,19 +206,38 @@ public final class Claypot
     this.logExceptionFriendly(logger, true, e.getCause());
   }
 
+  @Override
+  public String toString()
+  {
+    return String.format(
+      "[Claypot 0x%s]",
+      Long.toUnsignedString(System.identityHashCode(this), 16)
+    );
+  }
+
   private static final class Context implements CLPCommandContextType
   {
     private final JCommander commander;
+    private final CLPStringsType strings;
     private final CLPApplicationConfiguration configuration;
 
     private Context(
       final JCommander inCommander,
+      final CLPStringsType inStrings,
       final CLPApplicationConfiguration inConfiguration)
     {
       this.commander =
         Objects.requireNonNull(inCommander, "commander");
+      this.strings =
+        Objects.requireNonNull(inStrings, "inStrings");
       this.configuration =
         Objects.requireNonNull(inConfiguration, "inConfiguration");
+    }
+
+    @Override
+    public CLPStringsType strings()
+    {
+      return this.strings;
     }
 
     @Override
@@ -204,14 +251,5 @@ public final class Claypot
     {
       return this.commander;
     }
-  }
-
-  @Override
-  public String toString()
-  {
-    return String.format(
-      "[Claypot 0x%s]",
-      Long.toUnsignedString(System.identityHashCode(this), 16)
-    );
   }
 }

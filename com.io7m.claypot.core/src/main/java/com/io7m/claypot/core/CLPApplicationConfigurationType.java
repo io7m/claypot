@@ -20,15 +20,39 @@ import com.io7m.immutables.styles.ImmutablesStyleType;
 import org.immutables.value.Value;
 import org.slf4j.Logger;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+
+/**
+ * The application configuration.
+ */
 
 @ImmutablesStyleType
 @Value.Immutable
 public interface CLPApplicationConfigurationType
 {
+  /**
+   * @return The logger used for command-line messages
+   */
+
   Logger logger();
 
+  /**
+   * @return The name of the application
+   */
+
   String programName();
+
+  /**
+   * @return The URI of any documentation for the application
+   */
+
+  Optional<URI> documentationURI();
+
+  /**
+   * @return The list of commands
+   */
 
   List<CLPCommandConstructorType> commands();
 }

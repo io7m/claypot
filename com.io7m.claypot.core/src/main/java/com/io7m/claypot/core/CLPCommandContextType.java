@@ -24,6 +24,8 @@ import com.beust.jcommander.JCommander;
 
 public interface CLPCommandContextType
 {
+  CLPStringsType strings();
+
   CLPApplicationConfiguration configuration();
 
   JCommander commander();

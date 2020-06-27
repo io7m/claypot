@@ -16,8 +16,12 @@
 
 package com.io7m.claypot.core;
 
+import com.io7m.claypot.core.internal.CLPXMLResourceBundle;
 import org.osgi.annotation.versioning.ProviderType;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -51,6 +55,29 @@ public abstract class CLPAbstractStrings implements CLPStringsType
     Objects.requireNonNull(id, "id");
     Objects.requireNonNull(args, "args");
     return MessageFormat.format(this.resources.getString(id), args);
+  }
+
+  protected static ResourceBundle ofXMLResource(
+    final Class<?> clazz,
+    final String resource)
+  {
+    try (var stream = clazz.getResourceAsStream(resource)) {
+      return ofXML(stream);
+    } catch (final IOException e) {
+      throw new UncheckedIOException(e);
+    }
+  }
+
+  protected static ResourceBundle ofXML(
+    final InputStream stream)
+  {
+    try {
+      return new CLPXMLResourceBundle(
+        Objects.requireNonNull(stream, "stream")
+      );
+    } catch (final IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 }
 

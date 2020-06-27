@@ -14,48 +14,39 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
+package com.io7m.claypot.example;
 
-import com.beust.jcommander.IStringConverter;
+import com.beust.jcommander.Parameters;
+import com.io7m.claypot.core.CLPAbstractCommand;
+import com.io7m.claypot.core.CLPCommandContextType;
+import com.io7m.claypot.core.CLPStringsType;
 
-/**
- * A converter for {@link CLPLogLevel} values.
- */
-
-public final class CLPLogLevelConverter
-  implements IStringConverter<CLPLogLevel>
+@Parameters(commandDescription = "Paint things blue.")
+public final class CEXBlue extends CLPAbstractCommand
 {
   private final CLPStringsType strings;
 
-  /**
-   * Construct a new converter.
-   */
-
-  public CLPLogLevelConverter()
+  public CEXBlue(final CLPCommandContextType inContext)
   {
-    this.strings = CLPStrings.create();
+    super(inContext);
+    this.strings = CEXStrings.create();
   }
 
   @Override
-  public CLPLogLevel convert(final String value)
+  protected Status executeActual()
   {
-    for (final CLPLogLevel v : CLPLogLevel.values()) {
-      if (value.equals(v.getName())) {
-        return v;
-      }
-    }
-
-    throw new CLPLogLevelUnrecognized(
-      this.strings.format("com.io7m.claypot.logLevelUnrecognized", value)
-    );
+    return Status.SUCCESS;
   }
 
   @Override
-  public String toString()
+  public String extendedHelp()
   {
-    return String.format(
-      "[CLPLogLevelConverter 0x%s]",
-      Long.toUnsignedString(System.identityHashCode(this), 16)
-    );
+    return this.strings.format("blueExtendedHelp");
+  }
+
+  @Override
+  public String name()
+  {
+    return "blue";
   }
 }

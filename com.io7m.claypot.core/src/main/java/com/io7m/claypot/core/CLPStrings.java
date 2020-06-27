@@ -18,8 +18,11 @@ package com.io7m.claypot.core;
 
 import java.util.ResourceBundle;
 
-public final class CLPStrings
-  extends CLPAbstractStrings
+/**
+ * The default provider of strings.
+ */
+
+public final class CLPStrings extends CLPAbstractStrings
 {
   private CLPStrings(
     final ResourceBundle inResources)
@@ -27,10 +30,14 @@ public final class CLPStrings
     super(inResources);
   }
 
+  /**
+   * @return A new string provider
+   */
+
   public static CLPStringsType create()
   {
     return new CLPStrings(
-      ResourceBundle.getBundle("com.io7m.claypot.core.Claypot")
+      ofXMLResource(CLPStrings.class, "/com/io7m/claypot/core/Claypot.xml")
     );
   }
 }

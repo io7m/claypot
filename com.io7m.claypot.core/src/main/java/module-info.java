@@ -14,39 +14,23 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.example;
+/**
+ * JCommander conventions for io7m projects (Core)
+ */
 
-import com.beust.jcommander.Parameters;
-import com.io7m.claypot.core.CLPCommandContextType;
-import com.io7m.claypot.core.CLPAbstractCommand;
-import com.io7m.claypot.core.CLPStringsType;
-
-@Parameters(commandDescription = "Paint things red.")
-public final class CEXRed extends CLPAbstractCommand
+module com.io7m.claypot.core
 {
-  private final CLPStringsType strings;
+  requires static com.io7m.immutables.style;
+  requires static org.immutables.value;
+  requires static org.osgi.annotation.bundle;
+  requires static org.osgi.annotation.versioning;
 
-  public CEXRed(final CLPCommandContextType inContext)
-  {
-    super(inContext);
-    this.strings = CEXStrings.create();
-  }
+  requires ch.qos.logback.classic;
+  requires jcommander;
+  requires org.slf4j;
 
-  @Override
-  protected Status executeActual()
-  {
-    return Status.SUCCESS;
-  }
+  opens com.io7m.claypot.core to jcommander;
+  opens com.io7m.claypot.core.internal to jcommander;
 
-  @Override
-  public String extendedHelp()
-  {
-    return this.strings.format("redExtendedHelp");
-  }
-
-  @Override
-  public String name()
-  {
-    return "red";
-  }
+  exports com.io7m.claypot.core;
 }

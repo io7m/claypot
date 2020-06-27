@@ -16,38 +16,36 @@
 
 package com.io7m.claypot.example;
 
-import com.io7m.claypot.core.CLPApplicationConfiguration;
-import com.io7m.claypot.core.Claypot;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.io7m.claypot.core.CLPAbstractStrings;
+import com.io7m.claypot.core.CLPStringsType;
 
-import java.net.URI;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.ResourceBundle;
 
-public final class CEXOthersMain
+/**
+ * The default provider of strings.
+ */
+
+public final class CEXStrings extends CLPAbstractStrings
 {
-  private static final Logger LOG =
-    LoggerFactory.getLogger(CEXOthersMain.class);
-
-  private CEXOthersMain()
+  private CEXStrings(
+    final ResourceBundle inResources)
   {
-
+    super(inResources);
   }
 
-  public static void main(
-    final String[] args)
-  {
-    final var applicationConfiguration =
-      CLPApplicationConfiguration.builder()
-        .setProgramName("cex")
-        .addCommands(CEXBlue::new)
-        .addCommands(CEXGreen::new)
-        .addCommands(CEXRed::new)
-        .setLogger(LOG)
-        .setDocumentationURI(URI.create("https://www.example.com/"))
-        .build();
+  /**
+   * @return A new string provider
+   */
 
-    final var claypot = Claypot.create(applicationConfiguration);
-    claypot.execute(args);
-    System.exit(claypot.exitCode());
+  public static CLPStringsType create()
+  {
+    try (var stream = CEXStrings.class.getResourceAsStream(
+      "/com/io7m/claypot/example/Example.xml")) {
+      return new CEXStrings(ofXML(stream));
+    } catch (final IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 }

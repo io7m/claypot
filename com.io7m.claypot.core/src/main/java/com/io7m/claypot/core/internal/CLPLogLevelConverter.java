@@ -14,39 +14,51 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.example;
+package com.io7m.claypot.core.internal;
 
-import com.beust.jcommander.Parameters;
-import com.io7m.claypot.core.CLPCommandContextType;
-import com.io7m.claypot.core.CLPAbstractCommand;
+import com.beust.jcommander.IStringConverter;
+import com.io7m.claypot.core.CLPLogLevel;
+import com.io7m.claypot.core.CLPStrings;
 import com.io7m.claypot.core.CLPStringsType;
 
-@Parameters(commandDescription = "Paint things red.")
-public final class CEXRed extends CLPAbstractCommand
+/**
+ * A converter for {@link CLPLogLevel} values.
+ */
+
+public final class CLPLogLevelConverter
+  implements IStringConverter<CLPLogLevel>
 {
   private final CLPStringsType strings;
 
-  public CEXRed(final CLPCommandContextType inContext)
+  /**
+   * Construct a new converter.
+   */
+
+  public CLPLogLevelConverter()
   {
-    super(inContext);
-    this.strings = CEXStrings.create();
+    this.strings = CLPStrings.create();
   }
 
   @Override
-  protected Status executeActual()
+  public CLPLogLevel convert(final String value)
   {
-    return Status.SUCCESS;
+    for (final CLPLogLevel v : CLPLogLevel.values()) {
+      if (value.equals(v.getName())) {
+        return v;
+      }
+    }
+
+    throw new CLPLogLevelUnrecognized(
+      this.strings.format("com.io7m.claypot.logLevelUnrecognized", value)
+    );
   }
 
   @Override
-  public String extendedHelp()
+  public String toString()
   {
-    return this.strings.format("redExtendedHelp");
-  }
-
-  @Override
-  public String name()
-  {
-    return "red";
+    return String.format(
+      "[CLPLogLevelConverter 0x%s]",
+      Long.toUnsignedString(System.identityHashCode(this), 16)
+    );
   }
 }

@@ -22,10 +22,38 @@
   </Match>
 
   <Match>
+    <Class name="com.io7m.claypot.core.CLPStrings"/>
+    <Method name="create"/>
+    <Bug pattern="EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS"/>
+  </Match>
+
+  <Match>
+    <Class name="com.io7m.claypot.core.CLPAbstractStrings"/>
+    <Method name="ofXML"/>
+    <Bug pattern="EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS"/>
+  </Match>
+
+  <Match>
+    <Class name="com.io7m.claypot.core.CLPAbstractStrings"/>
+    <Method name="ofXMLResource"/>
+    <Bug pattern="EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS"/>
+  </Match>
+
+  <Match>
+    <Class name="~com\.io7m\.claypot\.example\..+"/>
+  </Match>
+
+  <Match>
+    <Class name="com.io7m.claypot.core.internal.CLPBriefUsageFormatter"/>
+    <Bug pattern="OPM_OVERLY_PERMISSIVE_METHOD"/>
+  </Match>
+
+  <Match>
     <Or>
       <Bug pattern="CRLF_INJECTION_LOGS"/>
       <Bug pattern="LO_SUSPECT_LOG_CLASS"/>
       <Bug pattern="LO_TOSTRING_PARAMETER"/>
+      <Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>
       <Bug pattern="UVA_USE_VAR_ARGS"/>
     </Or>
   </Match>

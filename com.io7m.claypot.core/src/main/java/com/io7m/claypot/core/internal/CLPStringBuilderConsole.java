@@ -14,39 +14,49 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.example;
+package com.io7m.claypot.core.internal;
 
-import com.beust.jcommander.Parameters;
-import com.io7m.claypot.core.CLPCommandContextType;
-import com.io7m.claypot.core.CLPAbstractCommand;
-import com.io7m.claypot.core.CLPStringsType;
+import com.beust.jcommander.internal.Console;
 
-@Parameters(commandDescription = "Paint things red.")
-public final class CEXRed extends CLPAbstractCommand
+public final class CLPStringBuilderConsole implements Console
 {
-  private final CLPStringsType strings;
+  private final StringBuilder builder;
 
-  public CEXRed(final CLPCommandContextType inContext)
+  public CLPStringBuilderConsole()
   {
-    super(inContext);
-    this.strings = CEXStrings.create();
+    this.builder = new StringBuilder(128);
   }
 
   @Override
-  protected Status executeActual()
+  public void print(final String s)
   {
-    return Status.SUCCESS;
+    this.builder.append(s);
   }
 
   @Override
-  public String extendedHelp()
+  public void println(final String s)
   {
-    return this.strings.format("redExtendedHelp");
+    this.builder.append(s);
+    this.builder.append('\n');
+  }
+
+  public StringBuilder builder()
+  {
+    return this.builder;
   }
 
   @Override
-  public String name()
+  public char[] readPassword(final boolean b)
   {
-    return "red";
+    return new char[0];
+  }
+
+  @Override
+  public String toString()
+  {
+    return String.format(
+      "[CLPStringBuilderConsole 0x%s]",
+      Long.toUnsignedString(System.identityHashCode(this), 16)
+    );
   }
 }

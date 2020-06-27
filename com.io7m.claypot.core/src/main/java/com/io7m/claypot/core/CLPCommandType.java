@@ -26,6 +26,14 @@ import org.osgi.annotation.versioning.ProviderType;
 public interface CLPCommandType
 {
   /**
+   * @return Extra help text for the command
+   */
+
+  default String extendedHelp() {
+    return "";
+  }
+
+  /**
    * @return The name of the command
    */
 
