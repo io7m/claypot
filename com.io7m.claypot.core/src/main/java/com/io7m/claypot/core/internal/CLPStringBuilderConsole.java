@@ -14,47 +14,48 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
+package com.io7m.claypot.core.internal;
 
-import com.beust.jcommander.IStringConverter;
+import com.beust.jcommander.internal.Console;
 
-/**
- * A converter for {@link CLPLogLevel} values.
- */
-
-public final class CLPLogLevelConverter
-  implements IStringConverter<CLPLogLevel>
+public final class CLPStringBuilderConsole implements Console
 {
-  private final CLPStringsType strings;
+  private final StringBuilder builder;
 
-  /**
-   * Construct a new converter.
-   */
-
-  public CLPLogLevelConverter()
+  public CLPStringBuilderConsole()
   {
-    this.strings = CLPStrings.create();
+    this.builder = new StringBuilder(128);
   }
 
   @Override
-  public CLPLogLevel convert(final String value)
+  public void print(final String s)
   {
-    for (final CLPLogLevel v : CLPLogLevel.values()) {
-      if (value.equals(v.getName())) {
-        return v;
-      }
-    }
+    this.builder.append(s);
+  }
 
-    throw new CLPLogLevelUnrecognized(
-      this.strings.format("com.io7m.claypot.logLevelUnrecognized", value)
-    );
+  @Override
+  public void println(final String s)
+  {
+    this.builder.append(s);
+    this.builder.append('\n');
+  }
+
+  public StringBuilder builder()
+  {
+    return this.builder;
+  }
+
+  @Override
+  public char[] readPassword(final boolean b)
+  {
+    return new char[0];
   }
 
   @Override
   public String toString()
   {
     return String.format(
-      "[CLPLogLevelConverter 0x%s]",
+      "[CLPStringBuilderConsole 0x%s]",
       Long.toUnsignedString(System.identityHashCode(this), 16)
     );
   }

@@ -14,36 +14,31 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
+package com.io7m.claypot.tests;
+
+import com.io7m.claypot.core.CLPCommandContextType;
+import com.io7m.claypot.core.internal.CLPCommandRoot;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import static com.io7m.claypot.core.CLPCommandType.Status.SUCCESS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public final class CLPCommandRoot extends CLPAbstractCommand
+public final class CLPCommandRootTest
 {
-  public CLPCommandRoot(
-    final CLPCommandContextType inContext)
+  @Test
+  public void nameIsEmpty()
   {
-    super(inContext);
+    final var context = Mockito.mock(CLPCommandContextType.class);
+    assertTrue(new CLPCommandRoot(context).name().isEmpty());
   }
 
-  @Override
-  protected Status executeActual()
+  @Test
+  public void executeDoesNothing()
+    throws Exception
   {
-    return SUCCESS;
-  }
-
-  @Override
-  public String toString()
-  {
-    return String.format(
-      "[CLPCommandRoot 0x%s]",
-      Long.toUnsignedString(System.identityHashCode(this), 16)
-    );
-  }
-
-  @Override
-  public String name()
-  {
-    return "";
+    final var context = Mockito.mock(CLPCommandContextType.class);
+    assertEquals(SUCCESS, new CLPCommandRoot(context).execute());
   }
 }

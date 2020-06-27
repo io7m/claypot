@@ -14,49 +14,51 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
+package com.io7m.claypot.core.internal;
 
-import com.beust.jcommander.DefaultUsageFormatter;
-import com.beust.jcommander.Parameters;
+import com.beust.jcommander.IStringConverter;
+import com.io7m.claypot.core.CLPLogLevel;
+import com.io7m.claypot.core.CLPStrings;
+import com.io7m.claypot.core.CLPStringsType;
 
-import static com.io7m.claypot.core.CLPCommandType.Status.SUCCESS;
+/**
+ * A converter for {@link CLPLogLevel} values.
+ */
 
-@Parameters(
-  resourceBundle = "com.io7m.claypot.core.Claypot",
-  commandDescriptionKey = "com.io7m.claypot.helpDescription")
-public final class CLPCommandHelp extends CLPAbstractCommand
+public final class CLPLogLevelConverter
+  implements IStringConverter<CLPLogLevel>
 {
-  public CLPCommandHelp(
-    final CLPCommandContextType inContext)
+  private final CLPStringsType strings;
+
+  /**
+   * Construct a new converter.
+   */
+
+  public CLPLogLevelConverter()
   {
-    super(inContext);
+    this.strings = CLPStrings.create();
   }
 
   @Override
-  protected Status executeActual()
+  public CLPLogLevel convert(final String value)
   {
-    final var console = new CLPStringBuilderConsole();
-    final var commander = this.commander();
-    commander.setUsageFormatter(new DefaultUsageFormatter(commander));
-    commander.setConsole(console);
-    commander.usage();
+    for (final CLPLogLevel v : CLPLogLevel.values()) {
+      if (value.equals(v.getName())) {
+        return v;
+      }
+    }
 
-    this.logger().info("{}", console.builder().toString());
-    return SUCCESS;
+    throw new CLPLogLevelUnrecognized(
+      this.strings.format("com.io7m.claypot.logLevelUnrecognized", value)
+    );
   }
 
   @Override
   public String toString()
   {
     return String.format(
-      "[CLPCommandHelp 0x%s]",
+      "[CLPLogLevelConverter 0x%s]",
       Long.toUnsignedString(System.identityHashCode(this), 16)
     );
-  }
-
-  @Override
-  public String name()
-  {
-    return "help";
   }
 }

@@ -16,37 +16,36 @@
 
 package com.io7m.claypot.example;
 
-import com.beust.jcommander.Parameters;
-import com.io7m.claypot.core.CLPCommandContextType;
-import com.io7m.claypot.core.CLPAbstractCommand;
+import com.io7m.claypot.core.CLPAbstractStrings;
 import com.io7m.claypot.core.CLPStringsType;
 
-@Parameters(commandDescription = "Paint things red.")
-public final class CEXRed extends CLPAbstractCommand
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.ResourceBundle;
+
+/**
+ * The default provider of strings.
+ */
+
+public final class CEXStrings extends CLPAbstractStrings
 {
-  private final CLPStringsType strings;
-
-  public CEXRed(final CLPCommandContextType inContext)
+  private CEXStrings(
+    final ResourceBundle inResources)
   {
-    super(inContext);
-    this.strings = CEXStrings.create();
+    super(inResources);
   }
 
-  @Override
-  protected Status executeActual()
-  {
-    return Status.SUCCESS;
-  }
+  /**
+   * @return A new string provider
+   */
 
-  @Override
-  public String extendedHelp()
+  public static CLPStringsType create()
   {
-    return this.strings.format("redExtendedHelp");
-  }
-
-  @Override
-  public String name()
-  {
-    return "red";
+    try (var stream = CEXStrings.class.getResourceAsStream(
+      "/com/io7m/claypot/example/Example.xml")) {
+      return new CEXStrings(ofXML(stream));
+    } catch (final IOException e) {
+      throw new UncheckedIOException(e);
+    }
   }
 }

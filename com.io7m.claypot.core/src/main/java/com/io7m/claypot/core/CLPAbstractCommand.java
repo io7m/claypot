@@ -18,7 +18,7 @@ package com.io7m.claypot.core;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import com.beust.jcommander.Parameters;
+import com.io7m.claypot.core.internal.CLPLogLevelConverter;
 import org.osgi.annotation.versioning.ProviderType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,6 @@ import java.util.Objects;
  */
 
 @ProviderType
-@Parameters(resourceBundle = "com.io7m.claypot.core.Claypot")
 public abstract class CLPAbstractCommand implements CLPCommandType
 {
   private final JCommander commander;
@@ -39,7 +38,7 @@ public abstract class CLPAbstractCommand implements CLPCommandType
   @Parameter(
     names = "--verbose",
     converter = CLPLogLevelConverter.class,
-    descriptionKey = "com.io7m.claypot.rootDescription"
+    description = "Set the minimum logging verbosity level."
   )
   private CLPLogLevel verbose = CLPLogLevel.LOG_INFO;
 
@@ -69,6 +68,11 @@ public abstract class CLPAbstractCommand implements CLPCommandType
   protected final Logger logger()
   {
     return this.configuration().logger();
+  }
+
+  protected final CLPStringsType strings()
+  {
+    return this.context.strings();
   }
 
   protected final CLPApplicationConfiguration configuration()

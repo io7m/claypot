@@ -14,22 +14,9 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
-
 /**
- * A log level was unrecognized.
+ * JCommander conventions for io7m projects (Core internal classes)
  */
 
-public final class CLPLogLevelUnrecognized extends RuntimeException
-{
-  /**
-   * Construct an exception.
-   *
-   * @param message The error message
-   */
+package com.io7m.claypot.core.internal;
 
-  CLPLogLevelUnrecognized(final String message)
-  {
-    super(message);
-  }
-}

@@ -79,7 +79,11 @@ public enum CLPLogLevel
     return this.name;
   }
 
-  Level toLevel()
+  /**
+   * @return The level as a Logback level
+   */
+
+  public Level toLevel()
   {
     switch (this) {
       case LOG_TRACE:

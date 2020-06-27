@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+  <entry key="com.io7m.claypot.commandConflict">Multiple commands registered with the same name: {0}</entry>
+  <entry key="com.io7m.claypot.commands">Commands</entry>
+  <entry key="com.io7m.claypot.logLevelUnrecognized">Unrecognized log level: {0}</entry>
+  <entry key="com.io7m.claypot.stackTraceOf">Stacktrace of {0}: {1}</entry>
+  <entry key="com.io7m.claypot.causedBy">Caused by:&#x20;</entry>
+  <entry key="com.io7m.claypot.help"><![CDATA[
+Use the "help" command to examine specific commands (Try: {0} help help).
+]]></entry>
+  <entry key="com.io7m.claypot.helpExtended"><![CDATA[
+The "help" command, executed without arguments, shows the names of all
+commands including the names and types of all of their parameters.
+
+The "help" command can also be passed the name of a command. Commands
+may include extended help messages such as the one you are reading
+right now.
+
+Example: {0} help help
+]]></entry>
+</properties>

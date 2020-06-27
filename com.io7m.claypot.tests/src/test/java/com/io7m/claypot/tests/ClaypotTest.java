@@ -116,6 +116,26 @@ public final class ClaypotTest
   }
 
   @Test
+  public void helpShowsExtendedUsage()
+  {
+    final var applicationConfiguration =
+      CLPApplicationConfiguration.builder()
+        .setProgramName("cex")
+        .setLogger(this.spyLog)
+        .build();
+
+    final var claypot = Claypot.create(applicationConfiguration);
+    claypot.execute(new String[]{"help", "help"});
+
+    assertEquals(0, claypot.exitCode());
+    final var captor = ArgumentCaptor.forClass(StringBuilder.class);
+    verify(this.spyLog).info(eq("{}"), captor.capture());
+
+    final var argument = captor.getValue();
+    assertTrue(argument.toString().contains("The \"help\" command, executed without arguments, shows"));
+  }
+
+  @Test
   public void helpUnrecognizedParameter()
   {
     final var applicationConfiguration =
@@ -129,10 +149,10 @@ public final class ClaypotTest
 
     assertEquals(1, claypot.exitCode());
     final var captor = ArgumentCaptor.forClass(String.class);
-    verify(this.spyLog).error(eq("{}"), captor.capture());
+    verify(this.spyLog).error(eq("Unknown command: {}"), captor.capture());
 
     final var argument = captor.getValue();
-    assertTrue(argument.contains("Was passed main parameter '--unrecognized'"));
+    assertTrue(argument.contains("--unrecognized"));
   }
 
   @Test

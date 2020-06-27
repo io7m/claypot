@@ -14,49 +14,22 @@
  * IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-package com.io7m.claypot.core;
+package com.io7m.claypot.core.internal;
 
-import com.beust.jcommander.internal.Console;
+/**
+ * A log level was unrecognized.
+ */
 
-public final class CLPStringBuilderConsole implements Console
+public final class CLPLogLevelUnrecognized extends RuntimeException
 {
-  private final StringBuilder builder;
+  /**
+   * Construct an exception.
+   *
+   * @param message The error message
+   */
 
-  public CLPStringBuilderConsole()
+  public CLPLogLevelUnrecognized(final String message)
   {
-    this.builder = new StringBuilder(128);
-  }
-
-  @Override
-  public void print(final String s)
-  {
-    this.builder.append(s);
-  }
-
-  @Override
-  public void println(final String s)
-  {
-    this.builder.append(s);
-    this.builder.append('\n');
-  }
-
-  public StringBuilder builder()
-  {
-    return this.builder;
-  }
-
-  @Override
-  public char[] readPassword(final boolean b)
-  {
-    return new char[0];
-  }
-
-  @Override
-  public String toString()
-  {
-    return String.format(
-      "[CLPStringBuilderConsole 0x%s]",
-      Long.toUnsignedString(System.identityHashCode(this), 16)
-    );
+    super(message);
   }
 }

@@ -37,7 +37,7 @@ public final class CLPStrings extends CLPAbstractStrings
   public static CLPStringsType create()
   {
     return new CLPStrings(
-      ResourceBundle.getBundle("com.io7m.claypot.core.Claypot")
+      ofXMLResource(CLPStrings.class, "/com/io7m/claypot/core/Claypot.xml")
     );
   }
 }
