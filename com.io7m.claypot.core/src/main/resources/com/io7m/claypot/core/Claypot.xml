@@ -33,5 +33,6 @@ right now.
 Example: {0} help help
 ]]></entry>
 
-  <entry key="com.io7m.claypot.documentation">Documentation: {0}</entry>
+  <entry key="com.io7m.claypot.documentation"><![CDATA[Documentation:
+    {0}]]></entry>
 </properties>
