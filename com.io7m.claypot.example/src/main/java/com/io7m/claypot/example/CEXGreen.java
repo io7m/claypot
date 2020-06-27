@@ -16,38 +16,37 @@
 
 package com.io7m.claypot.example;
 
-import com.io7m.claypot.core.CLPApplicationConfiguration;
-import com.io7m.claypot.core.Claypot;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.beust.jcommander.Parameters;
+import com.io7m.claypot.core.CLPAbstractCommand;
+import com.io7m.claypot.core.CLPCommandContextType;
+import com.io7m.claypot.core.CLPStringsType;
 
-import java.net.URI;
-
-public final class CEXOthersMain
+@Parameters(commandDescription = "Paint things green.")
+public final class CEXGreen extends CLPAbstractCommand
 {
-  private static final Logger LOG =
-    LoggerFactory.getLogger(CEXOthersMain.class);
+  private final CLPStringsType strings;
 
-  private CEXOthersMain()
+  public CEXGreen(final CLPCommandContextType inContext)
   {
-
+    super(inContext);
+    this.strings = CEXStrings.create();
   }
 
-  public static void main(
-    final String[] args)
+  @Override
+  protected Status executeActual()
   {
-    final var applicationConfiguration =
-      CLPApplicationConfiguration.builder()
-        .setProgramName("cex")
-        .addCommands(CEXBlue::new)
-        .addCommands(CEXGreen::new)
-        .addCommands(CEXRed::new)
-        .setLogger(LOG)
-        .setDocumentationURI(URI.create("https://www.example.com/"))
-        .build();
+    return Status.SUCCESS;
+  }
 
-    final var claypot = Claypot.create(applicationConfiguration);
-    claypot.execute(args);
-    System.exit(claypot.exitCode());
+  @Override
+  public String extendedHelp()
+  {
+    return this.strings.format("greenExtendedHelp");
+  }
+
+  @Override
+  public String name()
+  {
+    return "green";
   }
 }

@@ -44,6 +44,11 @@
   </Match>
 
   <Match>
+    <Class name="com.io7m.claypot.core.internal.CLPBriefUsageFormatter"/>
+    <Bug pattern="OPM_OVERLY_PERMISSIVE_METHOD"/>
+  </Match>
+
+  <Match>
     <Or>
       <Bug pattern="CRLF_INJECTION_LOGS"/>
       <Bug pattern="LO_SUSPECT_LOG_CLASS"/>

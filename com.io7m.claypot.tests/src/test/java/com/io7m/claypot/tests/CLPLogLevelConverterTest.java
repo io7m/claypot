@@ -18,11 +18,9 @@ package com.io7m.claypot.tests;
 
 import ch.qos.logback.classic.Level;
 import com.io7m.claypot.core.internal.CLPLogLevelConverter;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public final class CLPLogLevelConverterTest
 {

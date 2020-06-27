@@ -126,7 +126,11 @@ public final class Claypot
 
       final String cmd = this.commander.getParsedCommand();
       if (cmd == null) {
-        CLPBriefUsageFormatter.showBriefUsage(logger, this.commander);
+        CLPBriefUsageFormatter.showBriefUsage(
+          logger,
+          this.configuration,
+          this.commander
+        );
         this.exitCode = 1;
         return;
       }

@@ -79,7 +79,7 @@ public final class CLPCommandHelp extends CLPAbstractCommand
     final var subCommander = commands.get(commandName);
     if (subCommander == null) {
       logger.error("Unknown command: {}", commandName);
-      showBriefUsage(logger, this.commander());
+      showBriefUsage(logger, this.context().configuration(), this.commander());
       return FAILURE;
     }
 

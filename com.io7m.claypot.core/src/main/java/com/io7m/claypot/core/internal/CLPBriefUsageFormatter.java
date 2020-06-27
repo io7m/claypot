@@ -20,6 +20,7 @@ import com.beust.jcommander.DefaultUsageFormatter;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.JCommander.ProgramName;
 import com.beust.jcommander.Parameters;
+import com.io7m.claypot.core.CLPApplicationConfiguration;
 import com.io7m.claypot.core.CLPStrings;
 import com.io7m.claypot.core.CLPStringsType;
 import org.slf4j.Logger;
@@ -30,14 +31,18 @@ import java.util.Objects;
 
 public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
 {
+  private final CLPApplicationConfiguration configuration;
   private final JCommander commander;
   private final CLPStringsType strings;
 
   public CLPBriefUsageFormatter(
+    final CLPApplicationConfiguration inConfiguration,
     final JCommander inCommander)
   {
     super(inCommander);
 
+    this.configuration =
+      Objects.requireNonNull(inConfiguration, "configuration");
     this.commander =
       Objects.requireNonNull(inCommander, "commander");
     this.strings =
@@ -46,13 +51,15 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
 
   public static void showBriefUsage(
     final Logger logger,
+    final CLPApplicationConfiguration inConfiguration,
     final JCommander commander)
   {
     Objects.requireNonNull(logger, "logger");
     Objects.requireNonNull(commander, "commander");
 
     final var console = new CLPStringBuilderConsole();
-    commander.setUsageFormatter(new CLPBriefUsageFormatter(commander));
+    commander.setUsageFormatter(
+      new CLPBriefUsageFormatter(inConfiguration, commander));
     commander.setConsole(console);
     commander.usage();
     logger.info("{}", console.builder().toString());
@@ -76,7 +83,7 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
     if (text.trim().isEmpty()) {
       return "";
     }
-    return "  " + text;
+    return String.format("  %s", text);
   }
 
   @Override
@@ -86,6 +93,9 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
     final int descriptionIndent,
     final String indent)
   {
+    out.append('\n');
+    this.showBasicHelp(out);
+
     out.append('\n');
     out.append(indent);
     out.append("  ");
@@ -123,7 +133,22 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
     }
 
     out.append('\n');
+    this.showDocumentation(out);
+  }
 
+  private void showDocumentation(
+    final StringBuilder out)
+  {
+    this.configuration.documentationURI().ifPresent(uri -> {
+      out.append("  ");
+      out.append(this.strings.format("com.io7m.claypot.documentation", uri));
+      out.append('\n');
+    });
+  }
+
+  private void showBasicHelp(
+    final StringBuilder out)
+  {
     final var programName = this.commander.getProgramName();
     this.strings.format("com.io7m.claypot.help", programName)
       .trim()
@@ -132,8 +157,6 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
         out.append(indentLine(line));
         out.append('\n');
       });
-
-    out.append('\n');
   }
 
   @Override
