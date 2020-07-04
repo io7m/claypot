@@ -23,25 +23,27 @@ import com.io7m.claypot.core.internal.CLPCommandHelp;
 import com.io7m.claypot.core.internal.CLPCommandRoot;
 import org.slf4j.Logger;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * The main wrapper over {@link JCommander}.
  */
 
-public final class Claypot
+public final class Claypot implements ClaypotType
 {
   private final CLPApplicationConfiguration configuration;
   private final JCommander commander;
-  private final HashMap<String, CLPCommandType> commandMap;
+  private final TreeMap<String, CLPCommandType> commandMap;
   private final CLPStringsType strings;
   private int exitCode;
 
   private Claypot(
     final CLPApplicationConfiguration inConfiguration,
     final JCommander inCommander,
-    final HashMap<String, CLPCommandType> inCommandMap,
+    final TreeMap<String, CLPCommandType> inCommandMap,
     final CLPStringsType inStrings)
   {
     this.configuration =
@@ -62,7 +64,7 @@ public final class Claypot
    * @return A new wrapper
    */
 
-  public static Claypot create(
+  public static ClaypotType create(
     final CLPApplicationConfiguration configuration)
   {
     final var strings = CLPStrings.create();
@@ -75,7 +77,7 @@ public final class Claypot
     final var constructors =
       configuration.commands();
     final var commandMap =
-      new HashMap<String, CLPCommandType>(constructors.size() + 1);
+      new TreeMap<String, CLPCommandType>();
 
     final var help = new CLPCommandHelp(context);
     commandMap.put(help.name(), help);
@@ -98,21 +100,13 @@ public final class Claypot
     return new Claypot(configuration, commander, commandMap, strings);
   }
 
-  /**
-   * @return The exit code resulting from the most recent {@link #execute(String[])}
-   */
-
+  @Override
   public int exitCode()
   {
     return this.exitCode;
   }
 
-  /**
-   * Execute the wrapper for the given command-line arguments.
-   *
-   * @param args The command-line arguments
-   */
-
+  @Override
   public void execute(
     final String[] args)
   {
@@ -145,6 +139,12 @@ public final class Claypot
       this.logExceptionFriendly(logger, false, e);
       this.exitCode = 1;
     }
+  }
+
+  @Override
+  public SortedMap<String, CLPCommandType> commands()
+  {
+    return Collections.unmodifiableSortedMap(this.commandMap);
   }
 
   private void logExceptionFriendly(

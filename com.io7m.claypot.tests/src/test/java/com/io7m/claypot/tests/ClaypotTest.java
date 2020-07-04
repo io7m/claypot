@@ -17,6 +17,7 @@
 package com.io7m.claypot.tests;
 
 import com.io7m.claypot.core.CLPApplicationConfiguration;
+import com.io7m.claypot.core.CLPCommandType;
 import com.io7m.claypot.core.Claypot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.internal.verification.Times;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Map;
+import java.util.SortedMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -230,5 +234,24 @@ public final class ClaypotTest
     Assertions.assertThrows(IllegalStateException.class, () -> {
       Claypot.create(applicationConfiguration);
     });
+  }
+
+  @Test
+  public void commandNames()
+  {
+    final var applicationConfiguration =
+      CLPApplicationConfiguration.builder()
+        .setProgramName("cex")
+        .setLogger(this.spyLog)
+        .addCommands(CrashCommand::new)
+        .addCommands(EmptyCommand::new)
+        .build();
+
+    final var claypot = Claypot.create(applicationConfiguration);
+
+    final Map<String, CLPCommandType> commands = claypot.commands();
+    assertEquals(3, commands.size());
+    assertEquals(CrashCommand.class, commands.get("crash").getClass());
+    assertEquals(EmptyCommand.class, commands.get("empty").getClass());
   }
 }
