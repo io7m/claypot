@@ -16,7 +16,6 @@
 
 package com.io7m.claypot.core.internal;
 
-import com.beust.jcommander.DefaultUsageFormatter;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 import com.io7m.claypot.core.CLPAbstractCommand;
@@ -66,7 +65,7 @@ public final class CLPCommandHelp extends CLPAbstractCommand
     if (this.commandNames.isEmpty()) {
       final var console = new CLPStringBuilderConsole();
       final var commander = this.commander();
-      commander.setUsageFormatter(new DefaultUsageFormatter(commander));
+      commander.setUsageFormatter(new CLPLongUsageFormatter(commander));
       commander.setConsole(console);
       commander.usage();
       logger.info("{}", console.builder().toString());
@@ -84,7 +83,7 @@ public final class CLPCommandHelp extends CLPAbstractCommand
     }
 
     final var console = new CLPStringBuilderConsole();
-    subCommander.setUsageFormatter(new DefaultUsageFormatter(subCommander));
+    subCommander.setUsageFormatter(new CLPLongUsageFormatter(subCommander));
     subCommander.setConsole(console);
     subCommander.usage();
 
