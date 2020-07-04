@@ -9,7 +9,7 @@
   <parent>
     <artifactId>com.io7m.claypot</artifactId>
     <groupId>com.io7m.claypot</groupId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
   </parent>
 
   <artifactId>com.io7m.claypot.example</artifactId>
