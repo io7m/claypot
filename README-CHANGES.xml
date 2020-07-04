@@ -4,7 +4,7 @@
     <c:release date="2020-06-26T00:00:00+00:00" ticket-system="com.github.io7m.claypot" version="0.0.1">
       <c:changes/>
     </c:release>
-    <c:release date="2020-07-04T15:08:18+00:00" ticket-system="com.github.io7m.claypot" version="0.0.2">
+    <c:release date="2020-07-04T00:00:00+00:00" ticket-system="com.github.io7m.claypot" version="0.0.2">
       <c:changes>
         <c:change date="2020-06-27T00:00:00+00:00" summary="Add extended help methods.">
           <c:tickets>
@@ -16,13 +16,17 @@
             <c:ticket id="3"/>
           </c:tickets>
         </c:change>
+      </c:changes>
+    </c:release>
+    <c:release date="2020-07-04T15:10:45+00:00" ticket-system="com.github.io7m.claypot" version="0.0.3">
+      <c:changes>
         <c:change date="2020-06-27T00:00:00+00:00" summary="Allow applications to publish documentation URIs.">
           <c:tickets>
             <c:ticket id="2"/>
           </c:tickets>
         </c:change>
         <c:change compatible="false" date="2020-07-04T00:00:00+00:00" summary="Introduce ClaypotType interface"/>
-        <c:change date="2020-07-04T15:08:18+00:00" summary="Introduce commands() method to return map of commands">
+        <c:change date="2020-07-04T00:00:00+00:00" summary="Introduce commands() method to return map of commands">
           <c:tickets>
             <c:ticket id="4"/>
           </c:tickets>
