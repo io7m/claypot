@@ -19,7 +19,7 @@ can be referenced using the @ symbol:
 
   $ echo help > file.txt
   $ echo help >> file.txt
-  $ cex @file.txt
+  $ {0} @file.txt
 ]]></entry>
 
   <entry key="com.io7m.claypot.helpExtended"><![CDATA[
