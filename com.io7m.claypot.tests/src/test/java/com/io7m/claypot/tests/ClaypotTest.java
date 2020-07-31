@@ -27,6 +27,7 @@ import org.mockito.internal.verification.Times;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -217,6 +218,25 @@ public final class ClaypotTest
 
     final var arg1 = captor2.getValue();
     assertTrue(arg1.contains("Stacktrace of java.io.IOException:"));
+  }
+
+  @Test
+  public void commandCrashesCause()
+  {
+    final var applicationConfiguration =
+      CLPApplicationConfiguration.builder()
+        .setProgramName("cex")
+        .setLogger(this.spyLog)
+        .addCommands(CrashCommand::new)
+        .build();
+
+    final var claypot = Claypot.create(applicationConfiguration);
+    claypot.execute(new String[]{"crash", "--verbose", "debug"});
+
+    assertEquals(1, claypot.exitCode());
+    final Exception cause = claypot.exitCause().orElseThrow();
+    assertEquals(IOException.class, cause.getClass());
+    assertEquals(IOException.class, cause.getCause().getClass());
   }
 
   @Test

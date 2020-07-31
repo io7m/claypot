@@ -18,6 +18,7 @@ package com.io7m.claypot.core;
 
 import com.beust.jcommander.JCommander;
 
+import java.util.Optional;
 import java.util.SortedMap;
 
 /**
@@ -31,6 +32,12 @@ public interface ClaypotType
    */
 
   int exitCode();
+
+  /**
+   * @return The exception raised during the most recent {@link #execute(String[])}
+   */
+
+  Optional<Exception> exitCause();
 
   /**
    * Execute the wrapper for the given command-line arguments.

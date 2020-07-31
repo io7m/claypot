@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 
 import java.util.Collections;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -39,6 +40,7 @@ public final class Claypot implements ClaypotType
   private final TreeMap<String, CLPCommandType> commandMap;
   private final CLPStringsType strings;
   private int exitCode;
+  private Exception exitCause;
 
   private Claypot(
     final CLPApplicationConfiguration inConfiguration,
@@ -107,6 +109,12 @@ public final class Claypot implements ClaypotType
   }
 
   @Override
+  public Optional<Exception> exitCause()
+  {
+    return Optional.ofNullable(this.exitCause);
+  }
+
+  @Override
   public void execute(
     final String[] args)
   {
@@ -135,9 +143,11 @@ public final class Claypot implements ClaypotType
     } catch (final ParameterException e) {
       logger.error("{}", e.getMessage());
       this.exitCode = 1;
+      this.exitCause = e;
     } catch (final Exception e) {
       this.logExceptionFriendly(logger, false, e);
       this.exitCode = 1;
+      this.exitCause = e;
     }
   }
 
