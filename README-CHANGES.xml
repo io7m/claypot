@@ -33,9 +33,14 @@
         </c:change>
       </c:changes>
     </c:release>
-    <c:release date="2020-07-11T11:04:31+00:00" ticket-system="com.github.io7m.claypot" version="0.0.4">
+    <c:release date="2020-07-11T00:00:00+00:00" ticket-system="com.github.io7m.claypot" version="0.0.4">
       <c:changes>
-        <c:change date="2020-07-11T11:04:31+00:00" summary="Fix usage text to contain program name correctly"/>
+        <c:change date="2020-07-11T00:00:00+00:00" summary="Fix usage text to contain program name correctly"/>
+      </c:changes>
+    </c:release>
+    <c:release date="2020-07-31T13:35:13+00:00" ticket-system="com.github.io7m.claypot" version="0.0.5">
+      <c:changes>
+        <c:change date="2020-07-31T13:35:13+00:00" summary="Add an exit cause API"/>
       </c:changes>
     </c:release>
   </c:releases>
