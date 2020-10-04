@@ -74,8 +74,8 @@
   </distributionManagement>
 
   <ciManagement>
-    <system>Travis CI</system>
-    <url>https://travis-ci.org/io7m/claypot</url>
+    <system>GitHub Actions</system>
+    <url>https://github.com/io7m/claypot</url>
   </ciManagement>
 
   <dependencyManagement>
