@@ -26,10 +26,8 @@
   </modules>
 
   <properties>
-    <com.codacy.id>e6b8b59da8fb4d8383f26601bcc37d48</com.codacy.id>
     <com.io7m.xstructural.version>1.2.0</com.io7m.xstructural.version>
     <io7m.api.previousVersion>0.0.1-SNAPSHOT</io7m.api.previousVersion>
-    <io7m.java.requiredSDKBuildVersion>11,[14,15)</io7m.java.requiredSDKBuildVersion>
     <junit.version>5.7.0-M1</junit.version>
     <org.immutables.version>2.8.3</org.immutables.version>
   </properties>
