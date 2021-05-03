@@ -96,12 +96,12 @@
       <dependency>
         <groupId>com.io7m.blackthorne</groupId>
         <artifactId>com.io7m.blackthorne.api</artifactId>
-        <version>0.0.5</version>
+        <version>1.2.1</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.jxe</groupId>
         <artifactId>com.io7m.jxe.core</artifactId>
-        <version>0.0.2</version>
+        <version>1.0.0</version>
       </dependency>
       <dependency>
         <groupId>com.io7m.junreachable</groupId>
@@ -181,7 +181,7 @@
       <dependency>
         <groupId>com.io7m.xstructural</groupId>
         <artifactId>com.io7m.xstructural.cmdline</artifactId>
-        <version>0.0.1</version>
+        <version>${com.io7m.xstructural.version}</version>
       </dependency>
       <dependency>
         <groupId>com.github.marschall</groupId>
