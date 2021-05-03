@@ -161,7 +161,7 @@
       <dependency>
         <groupId>org.mock-server</groupId>
         <artifactId>mockserver-netty</artifactId>
-        <version>5.10.0</version>
+        <version>5.11.2</version>
       </dependency>
       <dependency>
         <groupId>com.beust</groupId>
@@ -191,7 +191,7 @@
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
-        <version>3.3.3</version>
+        <version>3.9.0</version>
       </dependency>
       <dependency>
         <groupId>net.java.dev.jna</groupId>
