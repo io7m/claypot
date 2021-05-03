@@ -23,6 +23,10 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 
+/**
+ * Example application.
+ */
+
 public final class CEXOthersMain
 {
   private static final Logger LOG =
@@ -32,6 +36,12 @@ public final class CEXOthersMain
   {
 
   }
+
+  /**
+   * Main entry point.
+   *
+   * @param args Command-line arguments
+   */
 
   public static void main(
     final String[] args)

@@ -19,8 +19,18 @@ package com.io7m.claypot.core.internal;
 import com.beust.jcommander.DefaultUsageFormatter;
 import com.beust.jcommander.JCommander;
 
+/**
+ * A long usage formatter.
+ */
+
 public final class CLPLongUsageFormatter extends DefaultUsageFormatter
 {
+  /**
+   * A long usage formatter.
+   *
+   * @param commander The <tt>jcommander</tt> instance
+   */
+
   public CLPLongUsageFormatter(
     final JCommander commander)
   {

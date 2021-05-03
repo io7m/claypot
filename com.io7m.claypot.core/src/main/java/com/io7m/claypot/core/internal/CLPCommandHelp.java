@@ -29,6 +29,10 @@ import static com.io7m.claypot.core.CLPCommandType.Status.FAILURE;
 import static com.io7m.claypot.core.CLPCommandType.Status.SUCCESS;
 import static com.io7m.claypot.core.internal.CLPBriefUsageFormatter.showBriefUsage;
 
+/**
+ * The "help" command.
+ */
+
 @Parameters(commandDescription = "Show detailed help messages for commands.")
 public final class CLPCommandHelp extends CLPAbstractCommand
 {

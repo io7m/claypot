@@ -21,8 +21,18 @@ import com.io7m.claypot.core.CLPCommandContextType;
 
 import static com.io7m.claypot.core.CLPCommandType.Status.SUCCESS;
 
+/**
+ * The root command.
+ */
+
 public final class CLPCommandRoot extends CLPAbstractCommand
 {
+  /**
+   * The root command.
+   *
+   * @param inContext The command context
+   */
+
   public CLPCommandRoot(
     final CLPCommandContextType inContext)
   {

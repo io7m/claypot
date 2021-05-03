@@ -18,9 +18,17 @@ package com.io7m.claypot.core.internal;
 
 import com.beust.jcommander.internal.Console;
 
+/**
+ * A {@link StringBuilder} console.
+ */
+
 public final class CLPStringBuilderConsole implements Console
 {
   private final StringBuilder builder;
+
+  /**
+   * A {@link StringBuilder} console.
+   */
 
   public CLPStringBuilderConsole()
   {
@@ -39,6 +47,10 @@ public final class CLPStringBuilderConsole implements Console
     this.builder.append(s);
     this.builder.append('\n');
   }
+
+  /**
+   * @return The underlying string builder
+   */
 
   public StringBuilder builder()
   {

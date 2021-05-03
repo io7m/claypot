@@ -24,9 +24,21 @@ import com.beust.jcommander.JCommander;
 
 public interface CLPCommandContextType
 {
+  /**
+   * @return The string resources
+   */
+
   CLPStringsType strings();
 
+  /**
+   * @return The application configuration
+   */
+
   CLPApplicationConfiguration configuration();
+
+  /**
+   * @return The <tt>jcommander</tt> instance
+   */
 
   JCommander commander();
 }

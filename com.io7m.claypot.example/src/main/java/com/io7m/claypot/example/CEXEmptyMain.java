@@ -21,6 +21,10 @@ import com.io7m.claypot.core.Claypot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Example application.
+ */
+
 public final class CEXEmptyMain
 {
   private static final Logger LOG =
@@ -30,6 +34,12 @@ public final class CEXEmptyMain
   {
 
   }
+
+  /**
+   * Main entry point.
+   *
+   * @param args Command-line arguments
+   */
 
   public static void main(
     final String[] args)

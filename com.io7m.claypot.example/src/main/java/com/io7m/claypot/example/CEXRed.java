@@ -17,14 +17,24 @@
 package com.io7m.claypot.example;
 
 import com.beust.jcommander.Parameters;
-import com.io7m.claypot.core.CLPCommandContextType;
 import com.io7m.claypot.core.CLPAbstractCommand;
+import com.io7m.claypot.core.CLPCommandContextType;
 import com.io7m.claypot.core.CLPStringsType;
+
+/**
+ * The red command.
+ */
 
 @Parameters(commandDescription = "Paint things red.")
 public final class CEXRed extends CLPAbstractCommand
 {
   private final CLPStringsType strings;
+
+  /**
+   * The red command.
+   *
+   * @param inContext The command context
+   */
 
   public CEXRed(final CLPCommandContextType inContext)
   {

@@ -21,12 +21,23 @@ import com.io7m.claypot.core.CLPAbstractCommand;
 import com.io7m.claypot.core.CLPCommandContextType;
 import com.io7m.claypot.core.CLPStringsType;
 
+/**
+ * The green command.
+ */
+
 @Parameters(commandDescription = "Paint things green.")
 public final class CEXGreen extends CLPAbstractCommand
 {
   private final CLPStringsType strings;
 
-  public CEXGreen(final CLPCommandContextType inContext)
+  /**
+   * The green command.
+   *
+   * @param inContext The command context
+   */
+
+  public CEXGreen(
+    final CLPCommandContextType inContext)
   {
     super(inContext);
     this.strings = CEXStrings.create();

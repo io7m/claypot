@@ -25,9 +25,21 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+/**
+ * An XML-based resource bundle.
+ */
+
 public final class CLPXMLResourceBundle extends ResourceBundle
 {
   private final Properties props;
+
+  /**
+   * An XML-based resource bundle.
+   *
+   * @param stream The resource bundle stream
+   *
+   * @throws IOException On I/O errors
+   */
 
   public CLPXMLResourceBundle(
     final InputStream stream)

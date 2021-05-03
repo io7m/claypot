@@ -29,11 +29,22 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Objects;
 
+/**
+ * A brief usage formatter.
+ */
+
 public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
 {
   private final CLPApplicationConfiguration configuration;
   private final JCommander commander;
   private final CLPStringsType strings;
+
+  /**
+   * A brief usage formatter.
+   *
+   * @param inConfiguration The application configuration
+   * @param inCommander     The <tt>jcommander</tt> instance
+   */
 
   public CLPBriefUsageFormatter(
     final CLPApplicationConfiguration inConfiguration,
@@ -48,6 +59,14 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
     this.strings =
       CLPStrings.create();
   }
+
+  /**
+   * Show a brief usage message.
+   *
+   * @param logger          The base logger
+   * @param inConfiguration The application configuration
+   * @param commander       The <tt>jcommander</tt> instance
+   */
 
   public static void showBriefUsage(
     final Logger logger,
@@ -111,14 +130,14 @@ public final class CLPBriefUsageFormatter extends DefaultUsageFormatter
       longest = Math.max(commandName.getName().length(), longest);
     }
     longest += 4;
-    
+
     for (final var commandName : commandNames) {
       final var commands = rawCommands.get(commandName);
       final Object arg = commands.getObjects().get(0);
       final Parameters p = arg.getClass().getAnnotation(Parameters.class);
 
       if (p == null || !p.hidden()) {
-        final String lineFormat = 
+        final String lineFormat =
           String.format("    %%-%ds %%s", Integer.valueOf(longest));
         final String description =
           String.format(
