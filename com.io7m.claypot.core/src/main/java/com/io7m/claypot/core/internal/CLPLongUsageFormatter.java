@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2020 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,8 +19,18 @@ package com.io7m.claypot.core.internal;
 import com.beust.jcommander.DefaultUsageFormatter;
 import com.beust.jcommander.JCommander;
 
+/**
+ * A long usage formatter.
+ */
+
 public final class CLPLongUsageFormatter extends DefaultUsageFormatter
 {
+  /**
+   * A long usage formatter.
+   *
+   * @param commander The <tt>jcommander</tt> instance
+   */
+
   public CLPLongUsageFormatter(
     final JCommander commander)
   {

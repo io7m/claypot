@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2020 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -21,12 +21,23 @@ import com.io7m.claypot.core.CLPAbstractCommand;
 import com.io7m.claypot.core.CLPCommandContextType;
 import com.io7m.claypot.core.CLPStringsType;
 
+/**
+ * The blue command.
+ */
+
 @Parameters(commandDescription = "Paint things blue.")
 public final class CEXBlue extends CLPAbstractCommand
 {
   private final CLPStringsType strings;
 
-  public CEXBlue(final CLPCommandContextType inContext)
+  /**
+   * The blue command.
+   *
+   * @param inContext The command context
+   */
+
+  public CEXBlue(
+    final CLPCommandContextType inContext)
   {
     super(inContext);
     this.strings = CEXStrings.create();

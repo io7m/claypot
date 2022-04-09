@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2020 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,9 +18,17 @@ package com.io7m.claypot.core.internal;
 
 import com.beust.jcommander.internal.Console;
 
+/**
+ * A {@link StringBuilder} console.
+ */
+
 public final class CLPStringBuilderConsole implements Console
 {
   private final StringBuilder builder;
+
+  /**
+   * A {@link StringBuilder} console.
+   */
 
   public CLPStringBuilderConsole()
   {
@@ -39,6 +47,10 @@ public final class CLPStringBuilderConsole implements Console
     this.builder.append(s);
     this.builder.append('\n');
   }
+
+  /**
+   * @return The underlying string builder
+   */
 
   public StringBuilder builder()
   {

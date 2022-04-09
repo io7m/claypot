@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2020 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -28,6 +28,10 @@ import java.util.List;
 import static com.io7m.claypot.core.CLPCommandType.Status.FAILURE;
 import static com.io7m.claypot.core.CLPCommandType.Status.SUCCESS;
 import static com.io7m.claypot.core.internal.CLPBriefUsageFormatter.showBriefUsage;
+
+/**
+ * The "help" command.
+ */
 
 @Parameters(commandDescription = "Show detailed help messages for commands.")
 public final class CLPCommandHelp extends CLPAbstractCommand

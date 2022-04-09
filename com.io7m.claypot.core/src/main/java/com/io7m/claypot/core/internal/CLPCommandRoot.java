@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020 Mark Raynsford <code@io7m.com> http://io7m.com
+ * Copyright © 2020 Mark Raynsford <code@io7m.com> https://www.io7m.com
  *
  * Permission to use, copy, modify, and/or distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -21,8 +21,18 @@ import com.io7m.claypot.core.CLPCommandContextType;
 
 import static com.io7m.claypot.core.CLPCommandType.Status.SUCCESS;
 
+/**
+ * The root command.
+ */
+
 public final class CLPCommandRoot extends CLPAbstractCommand
 {
+  /**
+   * The root command.
+   *
+   * @param inContext The command context
+   */
+
   public CLPCommandRoot(
     final CLPCommandContextType inContext)
   {
