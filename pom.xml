@@ -12,7 +12,7 @@
 
   <groupId>com.io7m.claypot</groupId>
   <artifactId>com.io7m.claypot</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <description>JCommander conventions for io7m projects</description>
