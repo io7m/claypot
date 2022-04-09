@@ -16,7 +16,7 @@
 
   <description>JCommander conventions for io7m projects (Core)</description>
   <name>com.io7m.claypot.core</name>
-  <url>https://www.github.com/io7m/claypot</url>
+  <url>https://www.io7m.com/software/claypot</url>
 
   <dependencies>
     <dependency>
